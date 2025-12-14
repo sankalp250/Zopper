@@ -18,55 +18,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
-st.markdown("""
-    <style>
-    .main-header {
-        font-size: 3rem;
-        font-weight: bold;
-        color: #2E86AB;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .metric-card {
-        background-color: #E8F4F8;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 0.5rem 0;
-    }
-    .stMetric {
-        background-color: #F0F8FF;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border: 1px solid #B0C4DE;
-    }
-    .stMetric label {
-        color: #2C3E50 !important;
-        font-weight: 600;
-    }
-    .stMetric [data-testid="stMetricValue"] {
-        color: #1E3A8A !important;
-        font-weight: bold;
-    }
-    /* Make all text more visible */
-    .element-container {
-        color: #1F2937;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        color: #1F2937 !important;
-    }
-    /* Table styling */
-    .dataframe {
-        background-color: #FFFFFF;
-        color: #1F2937;
-    }
-    /* Sidebar styling */
-    [data-testid="stSidebar"] {
-        background-color: #F8F9FA;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 @st.cache_data
 def load_data():
@@ -222,7 +173,7 @@ def predict_january(df, model):
 
 # Main App
 def main():
-    st.markdown('<h1 class="main-header">📊 Zopper Device Insurance Attach % Analysis</h1>', unsafe_allow_html=True)
+    st.title("📊 Zopper Device Insurance Attach % Analysis")
     st.markdown("---")
     
     # Load data
@@ -278,13 +229,15 @@ def main():
             title="Average Attach Percentage by Month",
             labels={'Attach_Percentage': 'Attach %', 'Month': 'Month'}
         )
-        fig.update_traces(line_color='#1f77b4', line_width=3, marker_size=10)
+        fig.update_traces(line_width=3, marker_size=10)
         fig.update_layout(
             height=400, 
             showlegend=False,
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -301,7 +254,15 @@ def main():
             color='Attach_Percentage',
             color_continuous_scale='Blues'
         )
-        fig.update_layout(height=400, xaxis_tickangle=-45)
+        fig.update_layout(
+            height=400, 
+            xaxis_tickangle=-45,
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         # Data table
@@ -343,11 +304,13 @@ def main():
             title=f"Monthly Trend - {selected_branch}",
             labels={'Attach_Percentage': 'Attach %'}
         )
-        fig.update_traces(line_color='#2ca02c', line_width=3)
+        fig.update_traces(line_width=3)
         fig.update_layout(
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -367,9 +330,11 @@ def main():
         fig.update_layout(
             height=500, 
             xaxis_tickangle=-45,
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
         )
         st.plotly_chart(fig, use_container_width=True)
     
@@ -402,7 +367,7 @@ def main():
             title=f"Performance Trend - {selected_store}",
             labels={'Attach_Percentage': 'Attach %'}
         )
-        fig.update_traces(line_color='#ff7f0e', line_width=3, marker_size=10)
+        fig.update_traces(line_width=3, marker_size=10)
         fig.add_hline(
             y=store_data['Attach_Percentage'].mean(),
             line_dash="dash",
@@ -410,9 +375,11 @@ def main():
             annotation_text=f"Average: {store_data['Attach_Percentage'].mean():.2f}%"
         )
         fig.update_layout(
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -444,9 +411,11 @@ def main():
             )
             fig.update_layout(
                 height=800,
-                plot_bgcolor='white',
-                paper_bgcolor='white',
-                font=dict(color='#1F2937', size=12)
+                plot_bgcolor='black',
+                paper_bgcolor='black',
+                font=dict(color='white', size=12),
+                xaxis=dict(gridcolor='gray', linecolor='white'),
+                yaxis=dict(gridcolor='gray', linecolor='white')
             )
             st.plotly_chart(fig, use_container_width=True)
         else:
@@ -462,9 +431,11 @@ def main():
                 labels={'Attach_Percentage': 'Attach %', 'count': 'Number of Stores'}
             )
             fig.update_layout(
-                plot_bgcolor='white',
-                paper_bgcolor='white',
-                font=dict(color='#1F2937', size=12)
+                plot_bgcolor='black',
+                paper_bgcolor='black',
+                font=dict(color='white', size=12),
+                xaxis=dict(gridcolor='gray', linecolor='white'),
+                yaxis=dict(gridcolor='gray', linecolor='white')
             )
             st.plotly_chart(fig, use_container_width=True)
             
@@ -499,9 +470,9 @@ def main():
             title="Distribution of Stores by Performance Category"
         )
         fig.update_layout(
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12)
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -513,16 +484,18 @@ def main():
             category_branch.reset_index().melt(id_vars='Branch', var_name='Category', value_name='Count'),
             x='Branch',
             y='Count',
-            color='Category',
             title="Store Categories by Branch",
             barmode='stack'
         )
+        fig.update_traces(marker_color='white')
         fig.update_layout(
             xaxis_tickangle=-45, 
             height=500,
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -608,9 +581,11 @@ def main():
             xaxis_title="December Attach %",
             yaxis_title="Predicted January Attach %",
             height=500,
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -639,9 +614,11 @@ def main():
         fig.update_layout(
             height=400, 
             xaxis_tickangle=-45,
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            font=dict(color='#1F2937', size=12)
+            plot_bgcolor='black',
+            paper_bgcolor='black',
+            font=dict(color='white', size=12),
+            xaxis=dict(gridcolor='gray', linecolor='white'),
+            yaxis=dict(gridcolor='gray', linecolor='white')
         )
         st.plotly_chart(fig, use_container_width=True)
         
