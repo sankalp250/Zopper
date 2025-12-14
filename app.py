@@ -240,7 +240,9 @@ def main():
         
         # Overall trend
         st.subheader("📈 Overall Monthly Trend")
+        month_order = {'Aug': 1, 'Sep': 2, 'Oct': 3, 'Nov': 4, 'Dec': 5}
         monthly_avg = df_long.groupby('Month')['Attach_Percentage'].mean().reset_index()
+        monthly_avg['Month_Order'] = monthly_avg['Month'].map(month_order)
         monthly_avg = monthly_avg.sort_values('Month_Order')
         
         fig = px.line(
@@ -297,7 +299,9 @@ def main():
         
         # Monthly trend for branch
         st.subheader("Monthly Trend")
+        month_order = {'Aug': 1, 'Sep': 2, 'Oct': 3, 'Nov': 4, 'Dec': 5}
         branch_monthly = branch_df.groupby('Month')['Attach_Percentage'].mean().reset_index()
+        branch_monthly['Month_Order'] = branch_monthly['Month'].map(month_order)
         branch_monthly = branch_monthly.sort_values('Month_Order')
         
         fig = px.line(
