@@ -24,21 +24,46 @@ st.markdown("""
     .main-header {
         font-size: 3rem;
         font-weight: bold;
-        color: #1f77b4;
+        color: #2E86AB;
         text-align: center;
         margin-bottom: 2rem;
     }
     .metric-card {
-        background-color: #f0f2f6;
+        background-color: #E8F4F8;
         padding: 1rem;
         border-radius: 0.5rem;
         margin: 0.5rem 0;
     }
     .stMetric {
-        background-color: white;
+        background-color: #F0F8FF;
         padding: 1rem;
         border-radius: 0.5rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border: 1px solid #B0C4DE;
+    }
+    .stMetric label {
+        color: #2C3E50 !important;
+        font-weight: 600;
+    }
+    .stMetric [data-testid="stMetricValue"] {
+        color: #1E3A8A !important;
+        font-weight: bold;
+    }
+    /* Make all text more visible */
+    .element-container {
+        color: #1F2937;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #1F2937 !important;
+    }
+    /* Table styling */
+    .dataframe {
+        background-color: #FFFFFF;
+        color: #1F2937;
+    }
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: #F8F9FA;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -254,7 +279,13 @@ def main():
             labels={'Attach_Percentage': 'Attach %', 'Month': 'Month'}
         )
         fig.update_traces(line_color='#1f77b4', line_width=3, marker_size=10)
-        fig.update_layout(height=400, showlegend=False)
+        fig.update_layout(
+            height=400, 
+            showlegend=False,
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         # Branch comparison
@@ -313,6 +344,11 @@ def main():
             labels={'Attach_Percentage': 'Attach %'}
         )
         fig.update_traces(line_color='#2ca02c', line_width=3)
+        fig.update_layout(
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         # Store performance in branch
@@ -328,7 +364,13 @@ def main():
             color='Attach_Percentage',
             color_continuous_scale='Viridis'
         )
-        fig.update_layout(height=500, xaxis_tickangle=-45)
+        fig.update_layout(
+            height=500, 
+            xaxis_tickangle=-45,
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
+        )
         st.plotly_chart(fig, use_container_width=True)
     
     # Store Analysis
@@ -367,6 +409,11 @@ def main():
             line_color="red",
             annotation_text=f"Average: {store_data['Attach_Percentage'].mean():.2f}%"
         )
+        fig.update_layout(
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         # Monthly breakdown
@@ -395,7 +442,12 @@ def main():
                 color_continuous_scale="RdYlGn",
                 title="Attach Percentage Heatmap"
             )
-            fig.update_layout(height=800)
+            fig.update_layout(
+                height=800,
+                plot_bgcolor='white',
+                paper_bgcolor='white',
+                font=dict(color='#1F2937', size=12)
+            )
             st.plotly_chart(fig, use_container_width=True)
         else:
             month_data = df_long[df_long['Month'] == selected_month]
@@ -408,6 +460,11 @@ def main():
                 nbins=30,
                 title=f"Distribution of Attach % in {selected_month}",
                 labels={'Attach_Percentage': 'Attach %', 'count': 'Number of Stores'}
+            )
+            fig.update_layout(
+                plot_bgcolor='white',
+                paper_bgcolor='white',
+                font=dict(color='#1F2937', size=12)
             )
             st.plotly_chart(fig, use_container_width=True)
             
@@ -441,6 +498,11 @@ def main():
             names='Category',
             title="Distribution of Stores by Performance Category"
         )
+        fig.update_layout(
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         # Category by branch
@@ -455,7 +517,13 @@ def main():
             title="Store Categories by Branch",
             barmode='stack'
         )
-        fig.update_layout(xaxis_tickangle=-45, height=500)
+        fig.update_layout(
+            xaxis_tickangle=-45, 
+            height=500,
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         # Detailed categorization table
@@ -539,7 +607,10 @@ def main():
             title="January Prediction vs December Performance",
             xaxis_title="December Attach %",
             yaxis_title="Predicted January Attach %",
-            height=500
+            height=500,
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -565,7 +636,13 @@ def main():
             color='Jan_Predicted',
             color_continuous_scale='Greens'
         )
-        fig.update_layout(height=400, xaxis_tickangle=-45)
+        fig.update_layout(
+            height=400, 
+            xaxis_tickangle=-45,
+            plot_bgcolor='white',
+            paper_bgcolor='white',
+            font=dict(color='#1F2937', size=12)
+        )
         st.plotly_chart(fig, use_container_width=True)
         
         # Complete predictions table
